@@ -46,7 +46,7 @@ class MissionsDetailViewController: UIViewController,UIImagePickerControllerDele
         missionNameLabel.text = mission?.title
         missionContentTextView.text = mission?.content
     }
-    @IBAction func choosePhoto(_ sender: Any) {
+/*    @IBAction func choosePhoto(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -98,9 +98,9 @@ class MissionsDetailViewController: UIViewController,UIImagePickerControllerDele
         }
     }
 
+}*/
+
 }
-
-
 @IBDesignable class CloseButton: UIButton {
     @IBInspectable var CornerRadius: CGFloat = 0{
         didSet{
@@ -161,7 +161,3 @@ class MissionsDetailViewController: UIViewController,UIImagePickerControllerDele
     }
     
 }
-
-
-
-

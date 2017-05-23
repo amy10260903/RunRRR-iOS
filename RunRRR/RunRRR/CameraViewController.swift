@@ -102,7 +102,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             }
         }
         
-        self.dismiss(animated: true, completion: nil)
+      //  self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func Cancel(_ sender: Any) {
