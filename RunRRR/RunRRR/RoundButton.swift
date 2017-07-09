@@ -29,10 +29,10 @@ class MissionsDetailViewController: UIViewController,UIImagePickerControllerDele
     @IBOutlet weak var cameraButton: CameraButton!
     
     override func viewDidLoad() {
-        self.missionImage.contentMode = .scaleAspectFit
-        self.showImage.contentMode = .scaleAspectFit
         super.viewDidLoad()
         setupMissionDetail()
+        self.missionImage.contentMode = .scaleAspectFit
+        self.showImage.contentMode = .scaleAspectFit
         let parameterSent : Parameters = ["operator_uid":userID, "token":token, "uid":userID]
         Alamofire.request("\(Config.HOST):\(Config.PORT)/\(Config.API_PATH)/member/read", parameters: parameterSent).responseJSON{ response in
             if response.result.isSuccess {
