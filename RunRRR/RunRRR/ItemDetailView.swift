@@ -19,8 +19,7 @@ class ItemDetailView: NSObject{
     let detailWindow = ItemDetailWindow()
     var delegateViewController:BagCollectionViewController?
     var item : Item?
-    let UID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
-    let token = UserDefaults.standard.string(forKey: "RunRRR_token")
+    
     func showDetail(_ itemToDisplay: Item){
         //show detail view
         item = itemToDisplay
@@ -55,19 +54,21 @@ class ItemDetailView: NSObject{
     }
     
     func useItem(){
-        let paraForDelete = ["operator_uid":self.UID, "pid":self.item?.pid as Any] as Parameters
+        let UID : Int =  UserDefaults.standard.integer(forKey: "RunRRR_UID")
+        let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
+        let paraForDelete : Parameters = ["operator_uid":UID, "token":token, "uid":UID, "pid":(self.item?.pid)! as Int]
         Alamofire.request("\(API_URL)/pack/delete", method: .delete, parameters: paraForDelete).responseJSON{ response in
-            print(response.result)
+            print(response)
+            
             switch(response.result){
             case .success:
-                _ = BagCollectionViewController().packs.popLast()
+                _ = self.delegateViewController?.packs.popLast()
             case .failure:
                 print("Error!")
             }
         }
         DispatchQueue.main.async{
             self.dismissDetail()
-            _ = self.delegateViewController?.packs.dropLast()
             self.delegateViewController?.collectionView?.reloadData()
         }
     }
