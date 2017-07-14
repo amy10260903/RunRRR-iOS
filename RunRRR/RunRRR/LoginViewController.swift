@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
 //        self.view.addConstraintWithFormat(format: "H:|-20-[v0]-20-|", views: accountTextField)
         
         self.view.addConstraintWithFormat(format: "V:|-10-[v0(\(self.view.frame.height/2))]", views: logoImage)
-        self.view.addConstraintWithFormat(format: "V:|[v0]-8-[v1]-10-[v2(45)]", views: logoImage, loginStack, loginButton)
+        self.view.addConstraintWithFormat(format: "V:[v0]-8-[v1]-10-[v2(45)]", views: logoImage, loginStack, loginButton)
         self.view.addConstraintWithFormat(format: "V:[v0(50)]-0-|", views: aboutUsButton)
         
         logoImage.image = UIImage(named: "RunRRR")
@@ -125,10 +125,4 @@ class LoginViewController: UIViewController {
     
 }
 
-extension UIViewController{
-    func showMessage(title: String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
-}
+
