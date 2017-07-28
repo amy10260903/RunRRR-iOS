@@ -37,7 +37,6 @@ class MissionsDetailViewController: UIViewController,UIImagePickerControllerDele
         Alamofire.request("\(Config.HOST):\(Config.PORT)/\(Config.API_PATH)/member/read", parameters: parameterSent).responseJSON{ response in
             if response.result.isSuccess {
                 let statusJson = JSON(response.result.value!)
-                print(statusJson)
                 let statusArray = statusJson["payload"]["objects"].arrayValue
                 let userStatus = statusArray[0]["status"].intValue
                     if ( userStatus == 1) {

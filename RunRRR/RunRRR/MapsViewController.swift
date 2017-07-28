@@ -27,6 +27,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     var currentLocatoin : CLLocation!
     var uploadCurrentLocationTimer = Timer()
     var notInAreaWarningTimer = Timer()
+    let menuBar = MenuBarBelow()
     //let networkQuality = Reach()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +35,6 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         getMapsBountry(map: mainMaps)
         getMissionLocations(map: mainMaps)
         getPoints(pointSqr: pointSqr)
-        
     }
     
     
@@ -63,6 +63,11 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         manager.startUpdatingLocation()
         scheduledUploadCurrentLocationTimer()
         scheduledNotInAreaWarning()
+        self.view.addSubview(menuBar)
+        self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+        self.view.addConstraintWithFormat(format: "H:|-8-[v0]-8-|", views: mainMaps)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*2/3))]-8-[v1]", views: mainMaps, menuBar)
         
     }
 
@@ -319,6 +324,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
                 let memberUpdateInfo = JSON(value)
                 //print(memberUpdateInfo)
                 self.validArea = memberUpdateInfo["payload"]["valid_area"].boolValue
+                print(self.validArea)
                 //print(self.validArea)
             case .failure(let error):
                 print(error)
