@@ -20,9 +20,15 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
     var packs = [Pack]()
 //    var items = [Item]()
     var bag = [[Item]]()
+    
+    let menuBar = MenuBarBelow()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMenuBar()
+        
+        self.view.addSubview(menuBar)
+        self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

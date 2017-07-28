@@ -62,8 +62,9 @@
                                     <constraint firstAttribute="height" constant="58" id="pTF-f8-8hV"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" restorationIdentifier="mainMaps" translatesAutoresizingMaskIntoConstraints="NO" id="csc-R5-SUQ" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="mainMaps" translatesAutoresizingMaskIntoConstraints="NO" id="csc-R5-SUQ" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="94" width="375" height="573"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="pointSqr" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXh-wD-47a">
@@ -80,12 +81,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VVk-yd-N2d" firstAttribute="top" secondItem="bF8-7C-WhH" secondAttribute="bottom" constant="8" id="7c4-ra-aTj"/>
-                            <constraint firstItem="csc-R5-SUQ" firstAttribute="top" secondItem="VVk-yd-N2d" secondAttribute="bottom" constant="8" symbolic="YES" id="Md3-vi-Kre"/>
                             <constraint firstItem="JXh-wD-47a" firstAttribute="leading" secondItem="6no-NC-Hah" secondAttribute="leading" id="Mgk-4k-8LW"/>
-                            <constraint firstAttribute="trailing" secondItem="csc-R5-SUQ" secondAttribute="trailing" id="VYZ-8q-rjy"/>
                             <constraint firstItem="VVk-yd-N2d" firstAttribute="leading" secondItem="6no-NC-Hah" secondAttribute="leading" id="Yf5-CO-zwg"/>
-                            <constraint firstItem="mr1-Gh-gZb" firstAttribute="top" secondItem="csc-R5-SUQ" secondAttribute="bottom" id="b5V-m6-9dF"/>
-                            <constraint firstItem="csc-R5-SUQ" firstAttribute="leading" secondItem="6no-NC-Hah" secondAttribute="leading" id="cQo-ok-Xir"/>
                             <constraint firstAttribute="trailing" secondItem="VVk-yd-N2d" secondAttribute="trailing" id="kF7-bU-1g9"/>
                             <constraint firstItem="mr1-Gh-gZb" firstAttribute="top" secondItem="JXh-wD-47a" secondAttribute="bottom" id="wKu-wK-eLR"/>
                         </constraints>

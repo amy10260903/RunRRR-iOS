@@ -17,7 +17,7 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
     private let refreshControl = UIRefreshControl()
     let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
     let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
-    
+    let menuBar = MenuBarBelow()
     lazy var missionCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -36,7 +36,7 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         setupCollectionView()
         // Do any additional setup after loading the view.
         missionCollectionView.register(MissionsCell.self, forCellWithReuseIdentifier: "missionsCell")
-        missionCollectionView.contentInset = UIEdgeInsetsMake(80, 0, 0, 0)
+        missionCollectionView.contentInset = UIEdgeInsetsMake(80, 0, 100, 0)
         if #available(iOS 10.0, *){
             missionCollectionView.refreshControl = refreshControl
         } else{
@@ -45,6 +45,14 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         setupMenuBar()
+        self.view.addSubview(menuBar)
+        self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+//        self.menuBar.collectionView.layoutIfNeeded()
+        let mapTapped = UIGestureRecognizer(target: self, action: #selector(segueToMap))
+        self.menuBar.collectionView.cellForItem(at: [0, 0])?.addGestureRecognizer(mapTapped)
+//        (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(changeToBag), for: .touchUpInside)
+//        (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
     }
     func setupCollectionView(){
         view.addSubview(missionCollectionView)
@@ -236,13 +244,13 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         }()
         view.addSubview(menuBar)
         view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintWithFormat(format: "V:|-20-[v0(58)]|", views: menuBar)
+        view.addConstraintWithFormat(format: "V:|-20-[v0(58)]", views: menuBar)
         (menuBar.arrangedSubviews[0] as! UIButton).addTarget(self, action: #selector(segueToMap), for: .touchUpInside)
         (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(changeToBag), for: .touchUpInside)
         (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
     }
     func segueToMap(){
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     func changeToBag(){
         delegate!.segueToBag()
