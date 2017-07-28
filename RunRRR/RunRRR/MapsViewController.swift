@@ -120,7 +120,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
             switch response.result{
                 case .success(let value):
                     let jsonData = JSON(value)
-                    let score = jsonData["payload"]["objects"]["score"].intValue.description
+                    let score = jsonData["payload"]["objects"][0]["score"].intValue.description
                     pointSqr.text = score
                 case .failure(let error):
                     print(error)
