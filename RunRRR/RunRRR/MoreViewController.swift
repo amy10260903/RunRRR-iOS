@@ -10,10 +10,12 @@ import UIKit
 
 class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
+    
     @IBAction func Back(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    var delegate: segueBetweenViewController!
     let list = ["Barcode","Die","About","SOS","Logout"]
     let identities = ["Barcode","Die","About","SOS","Logout"]
     
@@ -45,8 +47,11 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let vcName = identities[indexPath.row]
+        print(vcName)
         let viewController = storyboard?.instantiateViewController(withIdentifier: vcName)
-        self.navigationController?.pushViewController(viewController!, animated: true)
+        
+        //self.navigationController?.pushViewController(viewController!, animated: true)
+        self.present(viewController!, animated: true, completion: nil)
     }
     
     

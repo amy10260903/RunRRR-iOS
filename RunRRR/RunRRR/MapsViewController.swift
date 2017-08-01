@@ -324,7 +324,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
                 let memberUpdateInfo = JSON(value)
                 //print(memberUpdateInfo)
                 self.validArea = memberUpdateInfo["payload"]["valid_area"].boolValue
-                print(self.validArea)
+                //print(self.validArea)
                 //print(self.validArea)
             case .failure(let error):
                 print(error)
@@ -351,6 +351,11 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         vc.delegate = self
         self.present(vc, animated: false, completion: nil)
     }
+    @IBAction func moreButtonTapped(_ sender: Any){
+        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
+        vc.delegate = self
+        self.present(vc, animated: false, completion: nil)
+    }
     func segueToBag(){
         self.dismiss(animated: false, completion: nil)
         let vc = UIStoryboard(name: "Bag", bundle: nil).instantiateViewController(withIdentifier: "BagCollectionViewController") as! BagCollectionViewController
@@ -359,7 +364,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     }
     func segueToMore(){
         self.dismiss(animated: false, completion: nil)
-        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreNavigator") as! UINavigationController
+        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
         //print(vc.description)
         self.present(vc, animated: false, completion: nil)
     }

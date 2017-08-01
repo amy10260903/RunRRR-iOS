@@ -44,9 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func checkInternetStatus(){
         if currentReachabilityStatus == .reachableViaWiFi{
-            print("WiFi")
+            //print("WiFi")
         }else if currentReachabilityStatus == .reachableViaWWAN{
-            print("WWAN")
+            //print("WWAN")
         }else{
             print("No Internet")
             let alertController = UIAlertController(title: "No Internet", message: "趕快恢復網路！", preferredStyle: .alert)

@@ -128,19 +128,19 @@
 		439E95821E8CF02A0070B3CB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4887F87D1EDD18BE00788235 /* BarcodeViewController.swift */,
 				439E956F1E8CEE260070B3CB /* LoginViewController.swift */,
-				431830121EB9BE1B0057683B /* PhotoViewController.swift */,
 				439E95711E8CEE2C0070B3CB /* MapsViewController.swift */,
+				431830121EB9BE1B0057683B /* PhotoViewController.swift */,
 				4849188F1EC73A43004958D4 /* PhotoImportViewController.swift */,
-				48ECB6F21F0E7CAA00408D94 /* SOSViewController.swift */,
 				431830141EB9BE210057683B /* RoundButton.swift */,
 				4382F5E11EB098990085F563 /* MissionsViewController.swift */,
 				431830101EB9BE080057683B /* CameraViewController.swift */,
 				431D4D3E1E94C6FA00D5EDE0 /* BagCollectionViewController.swift */,
+				4887F87D1EDD18BE00788235 /* BarcodeViewController.swift */,
 				487FF3EB1E8E79C200F38EBA /* MoreViewController.swift */,
-				435E24891E9B3DC20097D8EC /* LogoutViewController.swift */,
+				48ECB6F21F0E7CAA00408D94 /* SOSViewController.swift */,
 				4364231B1F110AAE00D4B46F /* DieViewController.swift */,
+				435E24891E9B3DC20097D8EC /* LogoutViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";

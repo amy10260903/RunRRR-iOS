@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="J5w-Gc-Hvx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="J5w-Gc-Hvx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -54,7 +54,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="f7N-gI-SNU" kind="show" id="NS1-9I-vJb"/>
+                                            <action selector="moreButtonTapped:" destination="J5w-Gc-Hvx" eventType="touchUpInside" id="JxK-rp-R1A"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -96,14 +96,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RPt-R6-HKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="352.80000000000001" y="-226.23688155922042"/>
-        </scene>
-        <!--MoreNavigator-->
-        <scene sceneID="fxw-1Q-t2O">
-            <objects>
-                <viewControllerPlaceholder storyboardName="More" referencedIdentifier="MoreNavigator" id="f7N-gI-SNU" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jmj-Hv-tnT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1022" y="-138"/>
         </scene>
     </scenes>
 </document>
