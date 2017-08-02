@@ -33,8 +33,8 @@ import UIKit
             
             //add constraint
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 58).isActive = true
-            button.widthAnchor.constraint(equalToConstant: frame.width/4).isActive = true
+            //button.heightAnchor.constraint(equalToConstant: 58).isActive = true
+            //button.widthAnchor.constraint(equalToConstant: frame.width/4-2).isActive = true
             
             //setup the button action
             button.setTitle(pageInMenu[page], for: .normal)
