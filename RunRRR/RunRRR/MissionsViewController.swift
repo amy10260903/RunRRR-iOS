@@ -10,15 +10,15 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class MissionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MissionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, segueViewController {
     @IBOutlet weak var missionStatus: UIImageView!
-    var delegate: segueBetweenViewController!
     var missionShowList = [MissionsData]()
     var completeMissionList = [MissionsData]()
     private let refreshControl = UIRefreshControl()
     let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
     let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
     let menuBar = MenuBarBelow()
+    var prevVC:UIViewController?
     lazy var missionCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -33,7 +33,7 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        prevVC?.dismiss(animated: false, completion: nil)
         setupCollectionView()
         // Do any additional setup after loading the view.
         missionCollectionView.register(MissionsCell.self, forCellWithReuseIdentifier: "missionsCell")
@@ -46,18 +46,12 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
-        setupMenuBar()
-        /*self.view.addSubview(menuBar)
+        self.view.addSubview(menuBar)
         self.view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
-        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)*/
-        
-//        self.menuBar.collectionView.layoutIfNeeded()
-        let mapTapped = UIGestureRecognizer(target: self, action: #selector(segueToMap))
-        self.menuBar.collectionView.cellForItem(at: [0, 0])?.addGestureRecognizer(mapTapped)
-//        (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(changeToBag), for: .touchUpInside)
-//        (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+        menuBar.delegate = self
+        menuBar.dataSource = self
     }
-    
     
     
     
@@ -266,35 +260,24 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         self.loadMissions()
         refreshControl.endRefreshing()
     }
-    func setupMenuBar(){
-        let menuBar : MenuBar = {
-            let mb = MenuBar("Mission")
-            return mb
-        }()
-        let colorBar : UILabel = {
-            let bar = UILabel()
-            bar.backgroundColor = UIColor(red: 88/255, green: 248/255, blue:140/255, alpha: 1)
-            return bar
-        }()
-        view.addSubview(colorBar)
-        view.addSubview(menuBar)
-        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
-        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: colorBar)
-        view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
-        view.addConstraintWithFormat(format: "V:[v0(10)]-\(self.view.frame.height/6)-|", views: colorBar)
-        (menuBar.arrangedSubviews[0] as! UIButton).addTarget(self, action: #selector(segueToMap), for: .touchUpInside)
-        (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(changeToBag), for: .touchUpInside)
-        (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
-        (menuBar.arrangedSubviews[1] as! UIButton).setImage(UIImage (named:"tab_mission_sel"), for: .normal)
-    }
-    func segueToMap(){
+    
+    func segueToMaps() {
         dismiss(animated: false, completion: nil)
     }
-    func changeToBag(){
-        delegate!.segueToBag()
+    func segueToBags() {
+        let vc = UIStoryboard(name: "Bag", bundle: nil).instantiateViewController(withIdentifier: "BagCollectionViewController") as! BagCollectionViewController
+        //print(vc.description)
+        vc.prevVC = self
+        self.present(vc, animated: false, completion: nil)
     }
-    func changeToMore(){
-        delegate!.segueToMore()
+    func segueToMore() {
+        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
+        //print(vc.description)
+        vc.prevVC = self
+        self.present(vc, animated: false, completion: nil)
+    }
+    func segueToMissions() {
+        
     }
     /*
     // MARK: - Navigation

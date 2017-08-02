@@ -12,19 +12,19 @@ import SwiftyJSON
 
 private let reuseIdentifier = "BagItemCell"
 
-class BagCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    var delegate: segueBetweenViewController!
+class BagCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, segueViewController {
     private let refreshControl = UIRefreshControl()
     let LocalUserDefault = UserDefaults.standard
     let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var packs = [Pack]()
 //    var items = [Item]()
     var bag = [[Item]]()
-    
+    var prevVC: UIViewController?
     let menuBar = MenuBarBelow()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMenuBar()
+        prevVC?.dismiss(animated: false, completion: nil)
+        //setupMenuBar()
         
         self.view.addSubview(menuBar)
         self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
@@ -44,6 +44,8 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
         }
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         fetchPacks()
+        menuBar.delegate = self
+        menuBar.dataSource = self
     }
     override func viewDidAppear(_ animated: Bool) {
         self.collectionView?.reloadData()
@@ -51,42 +53,6 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
     func refreshData(){
         self.collectionView?.reloadData()
         fetchPacks()
-    }
-    func setupMenuBar(){
-        
-        let menuBar : MenuBar = {
-            let mb = MenuBar("Bag")
-            mb.backgroundColor = UIColor(red: 183/255, green: 183/255, blue:183/255, alpha: 1)
-            return mb
-        }()
-        let colorBar : UILabel = {
-            let bar = UILabel()
-            bar.backgroundColor = UIColor(red: 61/255, green: 138/255, blue:255/255, alpha: 1)
-            return bar
-        }()
-        view.addSubview(colorBar)
-        view.addSubview(menuBar)
-        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
-        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: colorBar)
-        view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
-        view.addConstraintWithFormat(format: "V:[v0(10)]-\(self.view.frame.height/6)-|", views: colorBar)
-        (menuBar.arrangedSubviews[0] as! UIButton).addTarget(self, action: #selector(segueToMap), for: .touchUpInside)
-        (menuBar.arrangedSubviews[1] as! UIButton).addTarget(self, action: #selector(changeToMissions), for: .touchUpInside)
-        (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
-        (menuBar.arrangedSubviews[0] as! UIButton).setImage(UIImage (named:"tab_map"), for: .normal)
-        (menuBar.arrangedSubviews[1] as! UIButton).setImage(UIImage (named:"tab_mission"), for: .normal)
-        (menuBar.arrangedSubviews[2] as! UIButton).setImage(UIImage (named:"tab_bag_sel"), for: .normal)
-        (menuBar.arrangedSubviews[3] as! UIButton).setImage(UIImage (named:"tab_more"), for: .normal)
-        
-    }
-    func segueToMap(){
-        dismiss(animated: false, completion: nil)
-    }
-    func changeToMissions(){
-        delegate!.segueToMission()
-    }
-    func changeToMore(){
-        delegate!.segueToMore()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -316,6 +282,25 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
             self.collectionView?.reloadData()
             self.refreshControl.endRefreshing()
         }
+    }
+    
+    func segueToMissions() {
+        let vc = UIStoryboard(name: "Missions", bundle: nil).instantiateViewController(withIdentifier: "MissionsViewController") as! MissionsViewController
+        //print(vc.description)
+        vc.prevVC = self
+        self.present(vc, animated: false, completion: nil)
+    }
+    func segueToMore() {
+        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
+        //print(vc.description)
+        vc.prevVC = self
+        self.present(vc, animated: false, completion: nil)
+    }
+    func segueToBags() {
+        
+    }
+    func segueToMaps() {
+        dismiss(animated: false, completion: nil)
     }
     
 }

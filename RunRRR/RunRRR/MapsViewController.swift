@@ -14,7 +14,7 @@ import SWXMLHash
 import CoreLocation
 
 
-class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenViewController{
+class MapsViewController: UIViewController, GMSMapViewDelegate, segueViewController{
 
     @IBOutlet weak var mainMaps: GMSMapView!
     @IBOutlet weak var pointSqr: UILabel!
@@ -28,7 +28,10 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     var currentLocatoin : CLLocation!
     var uploadCurrentLocationTimer = Timer()
     var notInAreaWarningTimer = Timer()
-    let menuBar = MenuBarBelow()
+    let menuBar : MenuBarBelow = {
+        let menubar = MenuBarBelow()
+        return menubar
+    }()
     //let networkQuality = Reach()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +44,6 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMenuBar()
         let camera = GMSCameraPosition.camera(withLatitude: 24.794589, longitude: 120.993393, zoom: 15.0)
         //let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
@@ -88,12 +90,14 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         manager.startUpdatingLocation()
         scheduledUploadCurrentLocationTimer()
         scheduledNotInAreaWarning()
-      /*  self.view.addSubview(menuBar)
+        menuBar.delegate = self
+        menuBar.dataSource = self
+        self.view.addSubview(menuBar)
         self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
         self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
         
-        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*2/3))]-8-[v1]", views: mainMaps, menuBar)*/
-        
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*2/3))]-8-[v1]", views: mainMaps, menuBar)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -378,49 +382,25 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     }*/
     
     
-    func setupMenuBar(){
-        let menuBar : MenuBar = {
-            let mb = MenuBar("Map")
-            return mb
-        }()
-        let colorBar : UILabel = {
-            let bar = UILabel()
-            bar.backgroundColor = UIColor(red: 232/255, green: 65/255, blue:26/255, alpha: 1)
-            return bar
-        }()
-        view.addSubview(colorBar)
-        view.addSubview(menuBar)
-        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
-        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: colorBar)
-        view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
-        view.addConstraintWithFormat(format: "V:[v0(10)]-\(self.view.frame.height/6)-|", views: colorBar)
-        (menuBar.arrangedSubviews[1] as! UIButton).addTarget(self, action: #selector(segueToMission), for: .touchUpInside)
-        (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(segueToBag), for: .touchUpInside)
-        (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(segueToMore), for: .touchUpInside)
-        (menuBar.arrangedSubviews[0] as! UIButton).setImage(UIImage (named:"tab_map_sel"), for: .normal)
-    }
     @IBAction func moreButtonTapped(_ sender: Any){
         let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
-        vc.delegate = self
         self.present(vc, animated: false, completion: nil)
     }
-    func segueToBag(){
-        self.dismiss(animated: false, completion: nil)
+    func segueToBags(){
         let vc = UIStoryboard(name: "Bag", bundle: nil).instantiateViewController(withIdentifier: "BagCollectionViewController") as! BagCollectionViewController
-        vc.delegate = self
         self.present(vc, animated: false, completion: nil)
     }
     func segueToMore(){
-        self.dismiss(animated: false, completion: nil)
         let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
         //print(vc.description)
         self.present(vc, animated: false, completion: nil)
     }
-    func segueToMission(){
-        self.dismiss(animated: false, completion: nil)
+    func segueToMissions(){
         let vc = UIStoryboard(name: "Missions", bundle: nil).instantiateViewController(withIdentifier: "MissionsViewController") as! MissionsViewController
-        vc.delegate = self
         self.present(vc, animated: false, completion: nil)
+    }
+    func segueToMaps() {
+        
     }
     // MARK: - Navigation
 
@@ -431,11 +411,4 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     //}
 
 }
-
-protocol segueBetweenViewController {
-    func segueToBag()
-    func segueToMore()
-    func segueToMission()
-}
-
 

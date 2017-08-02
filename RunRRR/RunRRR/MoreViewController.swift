@@ -8,20 +8,24 @@
 
 import UIKit
 
-class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, segueViewController {
     
     
     @IBAction func Back(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    var delegate: segueBetweenViewController!
+    var prevVC : UIViewController?
     let list = ["Barcode","Die","About","SOS","Logout"]
     let identities = ["Barcode","Die","About","SOS","Logout"]
-    
+    let menuBar = MenuBarBelow()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        prevVC?.dismiss(animated: false, completion: nil)
+        menuBar.delegate = self
+        menuBar.dataSource = self
+        self.view.addSubview(menuBar)
+        self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
         // Do any additional setup after loading the view.
     }
     
@@ -54,6 +58,24 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
         self.present(viewController!, animated: true, completion: nil)
     }
     
+    func segueToMissions() {
+        let vc = UIStoryboard(name: "Missions", bundle: nil).instantiateViewController(withIdentifier: "MissionsViewController") as! MissionsViewController
+        //print(vc.description)
+        vc.prevVC = self
+        self.present(vc, animated: false, completion: nil)
+    }
+    func segueToMore() {
+        
+    }
+    func segueToBags() {
+        let vc = UIStoryboard(name: "Bag", bundle: nil).instantiateViewController(withIdentifier: "BagCollectionViewController") as! BagCollectionViewController
+        //print(vc.description)
+        vc.prevVC = self
+        self.present(vc, animated: false, completion: nil)
+    }
+    func segueToMaps() {
+        dismiss(animated: false, completion: nil)
+    }
     
     
 

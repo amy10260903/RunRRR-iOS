@@ -8,9 +8,18 @@
 
 import UIKit
 
+protocol segueViewController {
+    func segueToMaps()
+    func segueToBags()
+    func segueToMissions()
+    func segueToMore()
+}
 
 
 class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    var delegate:segueViewController?
+    var dataSource:segueViewController?
     
     let pages = ["Maps", "Missions", "Bags", "More"]
     let icons = ["tab_map","tab_mission","tab_bag","tab_more"]
@@ -42,6 +51,25 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         cell.backgroundColor = UIColor(red: 183/255, green: 183/255, blue:183/255, alpha: 1)
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = CGFloat(0)
+        switch(indexPath.item){
+        case 0:
+            let tappedEvent = UITapGestureRecognizer(target: self, action: #selector(tappedMaps))
+            cell.addGestureRecognizer(tappedEvent)
+            break
+        case 1:
+            let tappedEvent = UITapGestureRecognizer(target: self, action: #selector(tappedMission))
+            cell.addGestureRecognizer(tappedEvent)
+            break
+        case 2:
+            let tappedEvent = UITapGestureRecognizer(target: self, action: #selector(tappedBag))
+            cell.addGestureRecognizer(tappedEvent)
+            break
+        case 3:
+            let tappedEvent = UITapGestureRecognizer(target: self, action: #selector(tappedMore))
+            cell.addGestureRecognizer(tappedEvent)
+            break
+        default: break
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -52,6 +80,18 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     }
     let cellId = "MenuBarCellId"
     
+    func tappedMaps(){
+        delegate?.segueToMaps()
+    }
+    func tappedBag(){
+        delegate?.segueToBags()
+    }
+    func tappedMission(){
+        delegate?.segueToMissions()
+    }
+    func tappedMore(){
+        delegate?.segueToMore()
+    }
     
     /* Initializing */
     override init(frame: CGRect) {
