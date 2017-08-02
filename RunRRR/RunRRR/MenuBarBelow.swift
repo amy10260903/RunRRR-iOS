@@ -12,12 +12,10 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     
     let pages = ["Maps", "Missions", "Bags", "More"]
     
-    lazy var collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor.darkGray
-        cv.delegate = self
-        cv.dataSource = self
         return cv
     }()
     
