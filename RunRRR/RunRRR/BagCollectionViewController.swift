@@ -16,19 +16,26 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
     var delegate: segueBetweenViewController!
     private let refreshControl = UIRefreshControl()
     let LocalUserDefault = UserDefaults.standard
-    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var packs = [Pack]()
 //    var items = [Item]()
     var bag = [[Item]]()
+    
+    let menuBar = MenuBarBelow()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMenuBar()
+        
+        self.view.addSubview(menuBar)
+        self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
         self.collectionView!.register(BagItemCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView!.contentInset = UIEdgeInsetsMake(90, 0, 0, 0)
+        self.collectionView!.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         // Do any additional setup after loading the view.
         if #available(iOS 10.0, *){
             self.collectionView!.refreshControl = refreshControl
@@ -46,19 +53,34 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
         fetchPacks()
     }
     func setupMenuBar(){
+        
         let menuBar : MenuBar = {
             let mb = MenuBar("Bag")
+            mb.backgroundColor = UIColor(red: 183/255, green: 183/255, blue:183/255, alpha: 1)
             return mb
         }()
+        let colorBar : UILabel = {
+            let bar = UILabel()
+            bar.backgroundColor = UIColor(red: 61/255, green: 138/255, blue:255/255, alpha: 1)
+            return bar
+        }()
+        view.addSubview(colorBar)
         view.addSubview(menuBar)
         view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
-        view.addConstraintWithFormat(format: "V:|-20-[v0(58)]", views: menuBar)
+        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: colorBar)
+        view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+        view.addConstraintWithFormat(format: "V:[v0(10)]-\(self.view.frame.height/6)-|", views: colorBar)
         (menuBar.arrangedSubviews[0] as! UIButton).addTarget(self, action: #selector(segueToMap), for: .touchUpInside)
         (menuBar.arrangedSubviews[1] as! UIButton).addTarget(self, action: #selector(changeToMissions), for: .touchUpInside)
         (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
+        (menuBar.arrangedSubviews[0] as! UIButton).setImage(UIImage (named:"tab_map"), for: .normal)
+        (menuBar.arrangedSubviews[1] as! UIButton).setImage(UIImage (named:"tab_mission"), for: .normal)
+        (menuBar.arrangedSubviews[2] as! UIButton).setImage(UIImage (named:"tab_bag_sel"), for: .normal)
+        (menuBar.arrangedSubviews[3] as! UIButton).setImage(UIImage (named:"tab_more"), for: .normal)
+        
     }
     func segueToMap(){
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     func changeToMissions(){
         delegate!.segueToMission()
@@ -96,6 +118,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BagItemCell
+        
         // Configure the cell
         if(indexPath.item == 0){  // the first block displays money
             cell.itemImage.image = UIImage(named: "money")
@@ -116,11 +139,13 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
         }
         return cell
     }
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/3, height: view.frame.height/4)
+        return CGSize(width: view.frame.width/3, height: view.frame.height/5)
     }
     
     let itemDetailView = ItemDetailView()
@@ -173,7 +198,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
         bag.removeAll()
         
         //Start calling API
-        let UID = LocalUserDefault.integer(forKey: "RunRRR_UID")
+        let UID = 290//LocalUserDefault.integer(forKey: "RunRRR_UID")
         let packParameter : Parameters = ["operator_uid":UID,"token":self.token, "uid":UID]
         Alamofire.request("\(API_URL)/pack/read", parameters: packParameter).responseJSON{ response in
             switch response.result{
@@ -205,7 +230,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
     private func fetchItem(){
         for itemToFetch in packs{
             if(itemToFetch.itemClass == .tool){
-                let UID = LocalUserDefault.integer(forKey: "RunRRR_UID")
+                let UID = 290//LocalUserDefault.integer(forKey: "RunRRR_UID")
                 let toolsParameter : Parameters = ["operator_uid":UID,"token":self.token, "tid":itemToFetch.id as Any]
                 Alamofire.request("\(API_URL)/tool/read", parameters:toolsParameter).responseJSON{ response in
 //                    print(response)
@@ -236,7 +261,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
                 }
             }
             else{
-                let UID = LocalUserDefault.integer(forKey: "RunRRR_UID")
+                let UID = 290//LocalUserDefault.integer(forKey: "RunRRR_UID")
                 let toolsParameter : Parameters = ["operator_uid":UID,"token":self.token, "cid":itemToFetch.id as Any]
                 Alamofire.request("\(API_URL)/clue/read", parameters:toolsParameter).responseJSON{ response in
                     switch(response.result){
@@ -303,34 +328,45 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
     let itemImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "sticker")
-        image.layer.borderWidth = 1
+        //image.layer.borderWidth = 1
         image.layer.borderColor = UIColor.black.cgColor
+        image.layer.cornerRadius = 15
+        image.layer.masksToBounds = true
         return image
     }()
     let itemName: UILabel = {
         let name = UILabel()
         name.text = "Unknown"
         name.textAlignment = NSTextAlignment.center
-        name.layer.borderWidth = 1
+        name.font = UIFont.systemFont(ofSize: 12)
+        //name.layer.borderWidth = 1
         name.layer.borderColor = UIColor.black.cgColor
+        
+        //name.lineBreakMode = NSLineBreakMode.byCharWrapping
+        //name.numberOfLines = 6
         return name
     }()
     let itemCount: UILabel = {
         let count = UILabel()
         count.text = "99"
         count.textAlignment = NSTextAlignment.center
+        count.layer.borderWidth = 1
+        count.layer.borderColor = UIColor.white.cgColor
+        count.layer.backgroundColor = UIColor.white.cgColor
+        count.layer.cornerRadius = 14
+        count.layer.masksToBounds = true
         return count
     }()
     func setupView(){
         addSubview(itemImage)
-        addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: itemImage)
-        addConstraintWithFormat(format: "V:|-0-[v0(\(frame.width))]", views: itemImage)
+        addConstraintWithFormat(format: "H:|-\(frame.width/8)-[v0]-\(frame.width/8)-|", views: itemImage)
+        addConstraintWithFormat(format: "V:|-\(frame.width/10)-[v0]-\(frame.width/4)-|", views: itemImage)
         addSubview(itemName)
-        addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: itemName)
-        addConstraintWithFormat(format: "V:|-\(frame.width)-[v0(35)]", views: itemName)
+        addConstraintWithFormat(format: "H:|-\(frame.width/8)-[v0]-\(frame.width/8)-|", views: itemName)
+        addConstraintWithFormat(format: "V:[v0(\(frame.width/8))]-\(frame.width/10)-|", views: itemName)
         addSubview(itemCount)
-        addConstraintWithFormat(format: "H:|-\(frame.width/2)-[v0]-\(frame.width/12)-|", views: itemCount)
-        addConstraintWithFormat(format: "V:|-\(frame.width/7*5)-[v0(\(frame.width/4))]", views: itemCount)
+        addConstraintWithFormat(format: "H:[v0(\(frame.width/4))]-\(frame.width/40)-|", views: itemCount)
+        addConstraintWithFormat(format: "V:|-\(frame.width/40)-[v0(\(frame.width/4))]", views: itemCount)
         
     }
     required init?(coder aDecoder: NSCoder) {
