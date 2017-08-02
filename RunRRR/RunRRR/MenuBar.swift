@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable class MenuBar: UIStackView {
     private var menuBarPages = [UIButton]()
     var pageInMenu : [String] = ["Map", "Mission", "Bag", "More"]
+    let normalImage = ["tab_map","tab_mission","tab_bag","tab_more"]
+    let selectedImage = ["tab_map_sel","tab_mission_sel","tab_bag_sel","tab_more_sel"]
     init(_ pageFrom: String) {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         setupStackView()
@@ -25,11 +27,12 @@ import UIKit
         alignment = .fill
         spacing = 0
         distribution = .fillEqually
+        backgroundColor = UIColor(red: 183/255, green: 183/255, blue:183/255, alpha: 1)
     }
     private func setupButtons(_ pageFrom: String){
         for page in 0..<4 {
             let button = UIButton()
-            button.backgroundColor = UIColor.white
+            button.backgroundColor = UIColor(red: 183/255, green: 183/255, blue:183/255, alpha: 1)
             
             //add constraint
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -38,6 +41,9 @@ import UIKit
             
             //setup the button action
             button.setTitle(pageInMenu[page], for: .normal)
+            button.setImage(UIImage(named: normalImage[page]), for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
+            button.setImage(UIImage(named: selectedImage[page]), for: .highlighted)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             button.isEnabled = true
             button.setTitleColor(UIColor.black, for: .normal)

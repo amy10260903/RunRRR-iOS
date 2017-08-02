@@ -20,10 +20,11 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     @IBOutlet weak var pointSqr: UILabel!
     var missionShowList = [MissionsData]()
     var completeMissionList = [MissionsData]()
-    let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
-    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
+    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var validArea:Bool = true
     let manager = CLLocationManager()
+    let pointSquare = UILabel()
     var currentLocatoin : CLLocation!
     var uploadCurrentLocationTimer = Timer()
     var notInAreaWarningTimer = Timer()
@@ -34,12 +35,13 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         self.mainMaps.clear()
         getMapsBountry(map: mainMaps)
         getMissionLocations(map: mainMaps)
-        getPoints(pointSqr: pointSqr)
+        getPoints(pointSqr: pointSquare)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMenuBar()
         let camera = GMSCameraPosition.camera(withLatitude: 24.794589, longitude: 120.993393, zoom: 15.0)
         //let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
@@ -51,11 +53,34 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         
         // Enable the myLocationButton
         mainMaps.settings.zoomGestures = true
-        pointSqr.text! = "10"
-        pointSqr.backgroundColor = UIColor(red:250/255, green:250/255, blue:250/255, alpha:1.0)
-        pointSqr.layer.masksToBounds = true
-        pointSqr.layer.cornerRadius = 8.0
+        mainMaps.layer.cornerRadius = 10
+        mainMaps.layer.masksToBounds = true
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
+        self.view.addConstraintWithFormat(format: "H:|-8-[v0]-8-|", views: mainMaps)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*19/30))]-\(self.view.frame.height/6+20)-|", views: mainMaps)
         
+        let pointLabel : UILabel = {
+            let label = UILabel()
+            label.text = "POINT"
+            label.textColor = UIColor.gray
+            return label
+        }()
+        self.view.addSubview(pointLabel)
+        
+        
+        let pointSquare : UILabel = {
+            let label = UILabel()
+            label.text = "100"
+            label.textColor = UIColor.black
+            label.font = UIFont.systemFont(ofSize: 48)
+            return label
+        }()
+        self.view.addSubview(pointSquare)
+        self.view.addConstraintWithFormat(format: "H:|-\(self.view.frame.width/3.5)-[v0]-[v1]-\(self.view.frame.width/3.5)-|", views: pointLabel,pointSquare)
+        self.view.addConstraintWithFormat(format: "V:|-40-[v0(30)]", views: pointLabel)
+        self.view.addConstraintWithFormat(format: "V:|-40-[v0(50)]", views: pointSquare)
+
+                
         //current location
         manager.delegate = self as? CLLocationManagerDelegate
         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -63,11 +88,11 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         manager.startUpdatingLocation()
         scheduledUploadCurrentLocationTimer()
         scheduledNotInAreaWarning()
-        self.view.addSubview(menuBar)
+      /*  self.view.addSubview(menuBar)
         self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
         self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
-        self.view.addConstraintWithFormat(format: "H:|-8-[v0]-8-|", views: mainMaps)
-        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*2/3))]-8-[v1]", views: mainMaps, menuBar)
+        
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*2/3))]-8-[v1]", views: mainMaps, menuBar)*/
         
     }
 
@@ -260,9 +285,9 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
                     
                     //filter out the fail mission
 
-                    var idxToRemove = Set<Int>()
+                /*     var idxToRemove = Set<Int>()
 
-                    for idx in 0...self.missionShowList.count-1{
+                   for idx in 0...self.missionShowList.count-1{
                         let timeHour = Int(self.missionShowList[idx].timeEnd.components(separatedBy: ":")[0])!
                         let timeMin = Int(self.missionShowList[idx].timeEnd.components(separatedBy: ":")[1])!
                         //if self.missionShowList[idx].check != 0 { //if reviewing and expired, still need to show
@@ -279,7 +304,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
                     self.missionShowList = self.missionShowList
                         .enumerated()
                         .filter {!idxToRemove.contains($0.offset)}
-                        .map {$0.element}
+                        .map {$0.element}*/
 
                 case .failure(let error):
                     print(error)
@@ -340,7 +365,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     
     }
     
-    @IBAction func missionButtonTapped(_ sender: Any) {
+ /*   @IBAction func missionButtonTapped(_ sender: Any) {
         let vc = UIStoryboard(name: "Missions", bundle: nil).instantiateViewController(withIdentifier: "MissionsViewController") as! MissionsViewController
         vc.delegate = self
         self.present(vc, animated: false, completion: nil)
@@ -349,7 +374,32 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         let vc = UIStoryboard(name: "Bag", bundle: nil).instantiateViewController(withIdentifier: "BagCollectionViewController") as! BagCollectionViewController
         vc.delegate = self
         self.present(vc, animated: false, completion: nil)
+    }*/
+    
+    
+    func setupMenuBar(){
+        let menuBar : MenuBar = {
+            let mb = MenuBar("Map")
+            return mb
+        }()
+        let colorBar : UILabel = {
+            let bar = UILabel()
+            bar.backgroundColor = UIColor(red: 232/255, green: 65/255, blue:26/255, alpha: 1)
+            return bar
+        }()
+        view.addSubview(colorBar)
+        view.addSubview(menuBar)
+        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
+        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: colorBar)
+        view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+        view.addConstraintWithFormat(format: "V:[v0(10)]-\(self.view.frame.height/6)-|", views: colorBar)
+        (menuBar.arrangedSubviews[1] as! UIButton).addTarget(self, action: #selector(segueToMission), for: .touchUpInside)
+        (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(segueToBag), for: .touchUpInside)
+        (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(segueToMore), for: .touchUpInside)
+        (menuBar.arrangedSubviews[0] as! UIButton).setImage(UIImage (named:"tab_map_sel"), for: .normal)
     }
+    
+    
     func segueToBag(){
         self.dismiss(animated: false, completion: nil)
         let vc = UIStoryboard(name: "Bag", bundle: nil).instantiateViewController(withIdentifier: "BagCollectionViewController") as! BagCollectionViewController
