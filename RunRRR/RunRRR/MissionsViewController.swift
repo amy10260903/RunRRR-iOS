@@ -11,17 +11,18 @@ import Alamofire
 import SwiftyJSON
 
 class MissionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var missionStatus: UIImageView!
     var delegate: segueBetweenViewController!
     var missionShowList = [MissionsData]()
     var completeMissionList = [MissionsData]()
     private let refreshControl = UIRefreshControl()
-    let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
-    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
+    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
     let menuBar = MenuBarBelow()
     lazy var missionCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.white
+        cv.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
         cv.delegate = self
         cv.dataSource = self
         return cv
@@ -36,7 +37,7 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         setupCollectionView()
         // Do any additional setup after loading the view.
         missionCollectionView.register(MissionsCell.self, forCellWithReuseIdentifier: "missionsCell")
-        missionCollectionView.contentInset = UIEdgeInsetsMake(80, 0, 100, 0)
+        missionCollectionView.contentInset = UIEdgeInsetsMake(20, 0, 120, 0)
         if #available(iOS 10.0, *){
             missionCollectionView.refreshControl = refreshControl
         } else{
@@ -44,16 +45,27 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
         setupMenuBar()
-        self.view.addSubview(menuBar)
-        self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
-        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+        /*self.view.addSubview(menuBar)
+        self.view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)*/
+        
 //        self.menuBar.collectionView.layoutIfNeeded()
         let mapTapped = UIGestureRecognizer(target: self, action: #selector(segueToMap))
         self.menuBar.collectionView.cellForItem(at: [0, 0])?.addGestureRecognizer(mapTapped)
 //        (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(changeToBag), for: .touchUpInside)
 //        (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func setupCollectionView(){
         view.addSubview(missionCollectionView)
         view.addConstraintWithFormat(format: "H:|[v0]|", views: missionCollectionView)
@@ -75,24 +87,41 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         cell.missionTiming.text = self.missionShowList[indexPath.row].timeEnd
         switch missionShowList[indexPath.row].type{
         case "1":
-            cell.missionPriorityThumbnail.text = "U"
+            cell.missionPriorityThumbnail.text = "限"
+            cell.missionPriorityThumbnail.textColor = UIColor(red: 255/255, green: 41/255, blue:41/255, alpha: 1)
+            cell.backgroundColor = UIColor(red: 255/255, green: 41/255, blue:41/255, alpha: 1)
+            
         case "2":
-            cell.missionPriorityThumbnail.text = "M"
+            cell.missionPriorityThumbnail.text = "主"
+            cell.missionPriorityThumbnail.textColor = UIColor(red: 75/255, green: 220/255, blue:191/255, alpha: 1)
+            cell.backgroundColor = UIColor(red: 75/255, green: 220/255, blue:191/255, alpha: 1)
+
+
         case "3":
-            cell.missionPriorityThumbnail.text = "S"
+            cell.missionPriorityThumbnail.text = "支"
+            cell.missionPriorityThumbnail.textColor = UIColor(red: 245/255, green: 157/255, blue:52/255, alpha: 1)
+            cell.backgroundColor = UIColor(red: 245/255, green: 157/255, blue:52/255, alpha: 1)
+
+
         default:
             cell.missionPriorityThumbnail.text = "?"
         }
         //cell.missionPriorityThumbnail.text = missionShow[indexPath.row].type
+        
         switch self.missionShowList[indexPath.row].check {
         case 0:
-            cell.missionStatus.backgroundColor = UIColor.green
+            //cell.missionStatus.backgroundColor = UIColor.green
+            cell.missionStatus.image = UIImage(named: "state_failed")
         case 1: //審核中
-            cell.missionStatus.backgroundColor = UIColor.blue
+            //cell.missionStatus.backgroundColor = UIColor.blue
+            cell.missionStatus.image = UIImage(named: "state_loading")
         case 2:
-            cell.missionStatus.backgroundColor = UIColor.darkGray
+            //cell.missionStatus.backgroundColor = UIColor.darkGray
+            cell.missionStatus.image = UIImage(named: "state_passed")
         default: //未解任務
-            cell.missionStatus.backgroundColor = UIColor.brown
+            cell.missionStatus.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 0)
+            //cell.missionName.backgroundColor = UIColor.brown
+            //cell.backgroundColor = UIColor.brown
         }
         return cell
 
@@ -242,12 +271,21 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
             let mb = MenuBar("Mission")
             return mb
         }()
+        let colorBar : UILabel = {
+            let bar = UILabel()
+            bar.backgroundColor = UIColor(red: 88/255, green: 248/255, blue:140/255, alpha: 1)
+            return bar
+        }()
+        view.addSubview(colorBar)
         view.addSubview(menuBar)
-        view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintWithFormat(format: "V:|-20-[v0(58)]", views: menuBar)
+        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: menuBar)
+        view.addConstraintWithFormat(format: "H:|-0-[v0]-0-|", views: colorBar)
+        view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
+        view.addConstraintWithFormat(format: "V:[v0(10)]-\(self.view.frame.height/6)-|", views: colorBar)
         (menuBar.arrangedSubviews[0] as! UIButton).addTarget(self, action: #selector(segueToMap), for: .touchUpInside)
         (menuBar.arrangedSubviews[2] as! UIButton).addTarget(self, action: #selector(changeToBag), for: .touchUpInside)
         (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(changeToMore), for: .touchUpInside)
+        (menuBar.arrangedSubviews[1] as! UIButton).setImage(UIImage (named:"tab_mission_sel"), for: .normal)
     }
     func segueToMap(){
         dismiss(animated: false, completion: nil)
@@ -269,3 +307,5 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
     */
 
 }
+
+
