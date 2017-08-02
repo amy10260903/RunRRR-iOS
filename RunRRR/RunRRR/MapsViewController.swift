@@ -150,7 +150,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
             switch response.result{
                 case .success(let value):
                     let jsonData = JSON(value)
-                    let score = jsonData["payload"]["objects"]["score"].intValue.description
+                    let score = jsonData["payload"]["objects"][0]["score"].intValue.description
                     pointSqr.text = score
                 case .failure(let error):
                     print(error)
@@ -350,6 +350,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
                 //print(memberUpdateInfo)
                 self.validArea = memberUpdateInfo["payload"]["valid_area"].boolValue
                 //print(self.validArea)
+                //print(self.validArea)
             case .failure(let error):
                 print(error)
             }
@@ -398,8 +399,11 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
         (menuBar.arrangedSubviews[3] as! UIButton).addTarget(self, action: #selector(segueToMore), for: .touchUpInside)
         (menuBar.arrangedSubviews[0] as! UIButton).setImage(UIImage (named:"tab_map_sel"), for: .normal)
     }
-    
-    
+    @IBAction func moreButtonTapped(_ sender: Any){
+        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
+        vc.delegate = self
+        self.present(vc, animated: false, completion: nil)
+    }
     func segueToBag(){
         self.dismiss(animated: false, completion: nil)
         let vc = UIStoryboard(name: "Bag", bundle: nil).instantiateViewController(withIdentifier: "BagCollectionViewController") as! BagCollectionViewController
@@ -408,7 +412,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueBetweenView
     }
     func segueToMore(){
         self.dismiss(animated: false, completion: nil)
-        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreNavigator") as! UINavigationController
+        let vc = UIStoryboard(name: "More", bundle: nil).instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
         //print(vc.description)
         self.present(vc, animated: false, completion: nil)
     }

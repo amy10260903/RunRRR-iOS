@@ -20,7 +20,8 @@ class SOSViewController: UIViewController, GMSMapViewDelegate{
     var validArea:Bool = true
     let manager = CLLocationManager()
     var currentLocatoin : CLLocation!
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
