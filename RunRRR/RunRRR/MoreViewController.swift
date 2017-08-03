@@ -89,6 +89,7 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
+        print(indexPath.description)
         tableView.reloadData()
     }
     

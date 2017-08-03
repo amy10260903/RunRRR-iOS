@@ -154,9 +154,9 @@
 			children = (
 				4341C7751F337DE8007A2A9A /* BarcodeTableViewCell.swift */,
 				7FFC81671F338EA0009BA1B2 /* AboutUsTableViewCell.swift */,
+				4341C7791F338B16007A2A9A /* DieTableViewCell.swift */,
 				436576321EACBE9300A4A617 /* ItemDetailView.swift */,
 				437636ED1F19158600398BE9 /* MenuBarBelow.swift */,
-				4341C7791F338B16007A2A9A /* DieTableViewCell.swift */,
 			);
 			name = SubViews;
 			sourceTree = "<group>";

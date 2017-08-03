@@ -17,8 +17,6 @@ class DieTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        let tapDismissKeyBoard : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
-        contentView.addGestureRecognizer(tapDismissKeyBoard)
         setupTitleBarView()
         setupView()
     }
@@ -46,7 +44,7 @@ class DieTableViewCell: UITableViewCell {
         smallCircle.image = UIImage(named: "bar_circle_icon")
         smallCircle.contentMode = .scaleAspectFill
         let smallCircleSize = titleBarView.frame.height - 4
-        titleBarView.addConstraintWithFormat(format: "H:|-5-[v0(\(smallCircleSize))]-5-[v1]-5-|", views: smallCircle, titleLabel)
+        titleBarView.addConstraintWithFormat(format: "H:|-10-[v0(\(smallCircleSize))]-10-[v1]-5-|", views: smallCircle, titleLabel)
         titleBarView.addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: smallCircle)
         titleBarView.addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: titleLabel)
     }
@@ -137,7 +135,7 @@ class DieTableViewCell: UITableViewCell {
         contentView.addConstraintWithFormat(format: "H:|-50-[v0]-50-|", views: hunterIDTextField)
         contentView.addConstraintWithFormat(format: "H:|-50-[v0]-50-|", views: hunterPWTextField)
         contentView.addConstraintWithFormat(format: "H:|-80-[v0]-80-|", views: dieButton)
-        let formatForVertical = "V:|-\(contentView.frame.height/4)-[v0]-8-[v1(30)]-15-[v2]-8-[v3(30)]-40-[v4]" as String
+        let formatForVertical = "V:|-75-[v0]-8-[v1(30)]-15-[v2]-8-[v3(30)]-40-[v4]" as String
         contentView.addConstraintWithFormat(format: formatForVertical, views: hunterIDLabel, hunterIDTextField, hunterPWLabel, hunterPWTextField, dieButton)
         self.dieButton.addTarget(self, action: #selector(goDie(_:)), for: .touchUpInside)
     }
