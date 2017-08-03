@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		430AFBD91F33290A00333813 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430AFBD81F33290A00333813 /* BarcodeView.swift */; };
 		4318300B1EB8971E0057683B /* configData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318300A1EB8971E0057683B /* configData.swift */; };
 		4318300D1EB9BDE50057683B /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4318300C1EB9BDE50057683B /* Camera.storyboard */; };
 		4318300F1EB9BDF00057683B /* MissionsDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4318300E1EB9BDF00057683B /* MissionsDetail.storyboard */; };
@@ -15,6 +14,7 @@
 		431830131EB9BE1B0057683B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431830121EB9BE1B0057683B /* PhotoViewController.swift */; };
 		431830151EB9BE210057683B /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431830141EB9BE210057683B /* RoundButton.swift */; };
 		431D4D3F1E94C6FA00D5EDE0 /* BagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431D4D3E1E94C6FA00D5EDE0 /* BagCollectionViewController.swift */; };
+		4341C7761F337DE8007A2A9A /* BarcodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341C7751F337DE8007A2A9A /* BarcodeTableViewCell.swift */; };
 		435E24861E9B33430097D8EC /* missionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435E24851E9B33430097D8EC /* missionsData.swift */; };
 		435E248A1E9B3DC20097D8EC /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435E24891E9B3DC20097D8EC /* LogoutViewController.swift */; };
 		4364231C1F110AAE00D4B46F /* DieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4364231B1F110AAE00D4B46F /* DieViewController.swift */; };
@@ -49,7 +49,6 @@
 		03A84B3247D28A89072CDBEE /* Pods_RunRRR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunRRR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18DD482414C4A29D10535B49 /* Pods-RunRRR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunRRR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RunRRR/Pods-RunRRR.debug.xcconfig"; sourceTree = "<group>"; };
 		1F13B208C49A62ECD2B8B2B5 /* Pods-RunRRR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunRRR.release.xcconfig"; path = "Pods/Target Support Files/Pods-RunRRR/Pods-RunRRR.release.xcconfig"; sourceTree = "<group>"; };
-		430AFBD81F33290A00333813 /* BarcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
 		4318300A1EB8971E0057683B /* configData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configData.swift; sourceTree = "<group>"; };
 		4318300C1EB9BDE50057683B /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		4318300E1EB9BDF00057683B /* MissionsDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MissionsDetail.storyboard; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		431830121EB9BE1B0057683B /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		431830141EB9BE210057683B /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		431D4D3E1E94C6FA00D5EDE0 /* BagCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BagCollectionViewController.swift; sourceTree = "<group>"; };
+		4341C7751F337DE8007A2A9A /* BarcodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeTableViewCell.swift; sourceTree = "<group>"; };
 		435E24851E9B33430097D8EC /* missionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = missionsData.swift; sourceTree = "<group>"; };
 		435E24891E9B3DC20097D8EC /* LogoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		4364231B1F110AAE00D4B46F /* DieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DieViewController.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		43A3E9251EBB232D00BFEB50 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				430AFBD81F33290A00333813 /* BarcodeView.swift */,
+				4341C7751F337DE8007A2A9A /* BarcodeTableViewCell.swift */,
 				436576321EACBE9300A4A617 /* ItemDetailView.swift */,
 				437636ED1F19158600398BE9 /* MenuBarBelow.swift */,
 			);
@@ -347,7 +347,6 @@
 				484918901EC73A43004958D4 /* PhotoImportViewController.swift in Sources */,
 				436576331EACBE9300A4A617 /* ItemDetailView.swift in Sources */,
 				4318300B1EB8971E0057683B /* configData.swift in Sources */,
-				430AFBD91F33290A00333813 /* BarcodeView.swift in Sources */,
 				7F3E9CC21E6920AB00A17814 /* ViewController.swift in Sources */,
 				431830151EB9BE210057683B /* RoundButton.swift in Sources */,
 				7F3E9CC81E6920AB00A17814 /* RunRRR.xcdatamodeld in Sources */,
@@ -361,6 +360,7 @@
 				439E95721E8CEE2C0070B3CB /* MapsViewController.swift in Sources */,
 				435E248A1E9B3DC20097D8EC /* LogoutViewController.swift in Sources */,
 				48ECB6F31F0E7CAA00408D94 /* SOSViewController.swift in Sources */,
+				4341C7761F337DE8007A2A9A /* BarcodeTableViewCell.swift in Sources */,
 				437636EE1F19158600398BE9 /* MenuBarBelow.swift in Sources */,
 				437636EC1F19112E00398BE9 /* Extensions.swift in Sources */,
 				439E95701E8CEE260070B3CB /* LoginViewController.swift in Sources */,

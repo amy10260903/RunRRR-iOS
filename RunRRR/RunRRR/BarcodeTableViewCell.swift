@@ -1,5 +1,5 @@
 //
-//  BarcodeView.swift
+//  BarcodeTableViewCell.swift
 //  RunRRR
 //
 //  Created by Jacky Huang on 2017/8/3.
@@ -8,31 +8,39 @@
 
 import UIKit
 
-class BarcodeView: UIView{
-    
+class BarcodeTableViewCell: UITableViewCell {
     let smallCircle = UIImageView()
     let titleBarView = UIView()
     let titleLabel = UILabel()
     let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
     let barcodeImageView = UIImageView()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTitleBarView()
         setupView()
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
     func setupView(){
-        addSubview(titleBarView)
-        addSubview(barcodeImageView)
-        addConstraintWithFormat(format: "H:|[v0]|", views: titleBarView)
-        addConstraintWithFormat(format: "V:|[v0(50)]", views: titleBarView)
-        addConstraintWithFormat(format: "H:|-20-[v0]-20-|", views: barcodeImageView)
-        addConstraintWithFormat(format: "V:[v0]-100-[v1(100)]", views: titleBarView,barcodeImageView)
+        contentView.addSubview(titleBarView)
+        contentView.addSubview(barcodeImageView)
+        contentView.addConstraintWithFormat(format: "H:|[v0]|", views: titleBarView)
+        contentView.addConstraintWithFormat(format: "V:|[v0(50)]", views: titleBarView)
+        contentView.addConstraintWithFormat(format: "H:|-20-[v0]-20-|", views: barcodeImageView)
+        contentView.addConstraintWithFormat(format: "V:[v0]-100-[v1(100)]", views: titleBarView,barcodeImageView)
         
         barcodeImageView.image = encodeImageFromUID(userID)
     }
@@ -45,9 +53,9 @@ class BarcodeView: UIView{
         smallCircle.image = UIImage(named: "bar_circle_icon")
         smallCircle.contentMode = .scaleAspectFill
         let smallCircleSize = titleBarView.frame.height - 4
-        addConstraintWithFormat(format: "H:|-5-[v0(\(smallCircleSize))]-5-[v1]-5-|", views: smallCircle, titleLabel)
-        addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: smallCircle)
-        addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: titleLabel)
+        titleBarView.addConstraintWithFormat(format: "H:|-5-[v0(\(smallCircleSize))]-5-[v1]-5-|", views: smallCircle, titleLabel)
+        titleBarView.addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: smallCircle)
+        titleBarView.addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: titleLabel)
     }
     func encodeImageFromUID(_ uid: Int) -> UIImage? {
         let uidString = String(uid)
@@ -57,7 +65,7 @@ class BarcodeView: UIView{
         
         return UIImage(ciImage: (filter?.outputImage)!)
     }
-    func hideContent(_ ishidden:Bool){
+    func hideContent(_ isHidden:Bool){
         self.barcodeImageView.isHidden = isHidden
     }
 }

@@ -33,7 +33,7 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
         self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
         moreTableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
         // Do any additional setup after loading the view.
-        
+        moreTableView.register(BarcodeTableViewCell.self, forCellReuseIdentifier: "moreCell")
         
     }
     
@@ -51,27 +51,15 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let MoreCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "MoreCell")
-        let barcodeView = BarcodeView()
-        /*
-        print(3)
-        print(indexPath.row)
-        if indexPath.row == 0{
-            barcodeView.hideContent(false)
-            print("f")
+        
+        let MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as! BarcodeTableViewCell
+        if selectedIndexPath == indexPath{
+            print("show")
+            MoreCell.hideContent(false)
         }else{
-            barcodeView.hideContent(true)
-            print("t")
+            print("hide")
+            MoreCell.hideContent(true)
         }
-        if(indexPath.item == 0){
-            barcodeView.frame = MoreCell.bounds
-            barcodeView.hideContent(true)
-            MoreCell.contentView.clipsToBounds = true
-            MoreCell.addSubview(barcodeView)
-        }else{
-            MoreCell.textLabel?.text = list[indexPath.row]
-        }
-        */
         return MoreCell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -89,7 +77,7 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         //self.navigationController?.pushViewController(viewController!, animated: true)
         //self.present(viewController!, animated: false, completion: nil)
-        tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        tableView.reloadData()
     }
     func segueToMissions() {
         let vc = UIStoryboard(name: "Missions", bundle: nil).instantiateViewController(withIdentifier: "MissionsViewController") as! MissionsViewController
