@@ -30,7 +30,7 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
         self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
         moreTableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
         // Do any additional setup after loading the view.
-        
+        moreTableView.register(BarcodeTableViewCell.self, forCellReuseIdentifier: "moreCell")
         
     }
     
@@ -48,15 +48,8 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let MoreCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "MoreCell")
-        if(indexPath.item == 0){
-            let barcodeView = BarcodeView()
-            MoreCell.addSubview(barcodeView)
-            barcodeView.frame = MoreCell.bounds
-            MoreCell.contentView.clipsToBounds = true
-        }else{
-            MoreCell.textLabel?.text = list[indexPath.row]
-        }
+        
+        let MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as! BarcodeTableViewCell
         return MoreCell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
