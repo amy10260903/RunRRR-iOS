@@ -54,10 +54,8 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         let MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as! BarcodeTableViewCell
         if selectedIndexPath == indexPath{
-            print("show")
             MoreCell.hideContent(false)
         }else{
-            print("hide")
             MoreCell.hideContent(true)
         }
         return MoreCell
