@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		430AFBD91F33290A00333813 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430AFBD81F33290A00333813 /* BarcodeView.swift */; };
 		4318300B1EB8971E0057683B /* configData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318300A1EB8971E0057683B /* configData.swift */; };
 		4318300D1EB9BDE50057683B /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4318300C1EB9BDE50057683B /* Camera.storyboard */; };
 		4318300F1EB9BDF00057683B /* MissionsDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4318300E1EB9BDF00057683B /* MissionsDetail.storyboard */; };
@@ -20,9 +21,9 @@
 		436576331EACBE9300A4A617 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436576321EACBE9300A4A617 /* ItemDetailView.swift */; };
 		436862871E98F32600965A44 /* Items_Clues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436862861E98F32600965A44 /* Items_Clues.swift */; };
 		43738C861E93A63600C696CE /* MissionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43738C851E93A63600C696CE /* MissionsCell.swift */; };
-		4382F5E01EB087B80085F563 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4382F5DF1EB087B80085F563 /* MenuBar.swift */; };
+		437636EC1F19112E00398BE9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437636EB1F19112E00398BE9 /* Extensions.swift */; };
+		437636EE1F19158600398BE9 /* MenuBarBelow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437636ED1F19158600398BE9 /* MenuBarBelow.swift */; };
 		4382F5E21EB098990085F563 /* MissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4382F5E11EB098990085F563 /* MissionsViewController.swift */; };
-		4382F5E41EB0B9D40085F563 /* lib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4382F5E31EB0B9D40085F563 /* lib.swift */; };
 		439E956E1E8CEE1A0070B3CB /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439E956D1E8CEE1A0070B3CB /* Login.storyboard */; };
 		439E95701E8CEE260070B3CB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E956F1E8CEE260070B3CB /* LoginViewController.swift */; };
 		439E95721E8CEE2C0070B3CB /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E95711E8CEE2C0070B3CB /* MapsViewController.swift */; };
@@ -48,6 +49,7 @@
 		03A84B3247D28A89072CDBEE /* Pods_RunRRR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunRRR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18DD482414C4A29D10535B49 /* Pods-RunRRR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunRRR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RunRRR/Pods-RunRRR.debug.xcconfig"; sourceTree = "<group>"; };
 		1F13B208C49A62ECD2B8B2B5 /* Pods-RunRRR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunRRR.release.xcconfig"; path = "Pods/Target Support Files/Pods-RunRRR/Pods-RunRRR.release.xcconfig"; sourceTree = "<group>"; };
+		430AFBD81F33290A00333813 /* BarcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
 		4318300A1EB8971E0057683B /* configData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configData.swift; sourceTree = "<group>"; };
 		4318300C1EB9BDE50057683B /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		4318300E1EB9BDF00057683B /* MissionsDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MissionsDetail.storyboard; sourceTree = "<group>"; };
@@ -61,9 +63,9 @@
 		436576321EACBE9300A4A617 /* ItemDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		436862861E98F32600965A44 /* Items_Clues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Items_Clues.swift; sourceTree = "<group>"; };
 		43738C851E93A63600C696CE /* MissionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionsCell.swift; sourceTree = "<group>"; };
-		4382F5DF1EB087B80085F563 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		437636EB1F19112E00398BE9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		437636ED1F19158600398BE9 /* MenuBarBelow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarBelow.swift; sourceTree = "<group>"; };
 		4382F5E11EB098990085F563 /* MissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionsViewController.swift; sourceTree = "<group>"; };
-		4382F5E31EB0B9D40085F563 /* lib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lib.swift; sourceTree = "<group>"; };
 		439E956D1E8CEE1A0070B3CB /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		439E956F1E8CEE260070B3CB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		439E95711E8CEE2C0070B3CB /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
@@ -101,8 +103,8 @@
 		435E248C1E9B4FF70097D8EC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				437636EB1F19112E00398BE9 /* Extensions.swift */,
 				43738C851E93A63600C696CE /* MissionsCell.swift */,
-				4382F5E31EB0B9D40085F563 /* lib.swift */,
 				436862861E98F32600965A44 /* Items_Clues.swift */,
 				435E24851E9B33430097D8EC /* missionsData.swift */,
 			);
@@ -126,19 +128,19 @@
 		439E95821E8CF02A0070B3CB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4887F87D1EDD18BE00788235 /* BarcodeViewController.swift */,
 				439E956F1E8CEE260070B3CB /* LoginViewController.swift */,
-				431830121EB9BE1B0057683B /* PhotoViewController.swift */,
 				439E95711E8CEE2C0070B3CB /* MapsViewController.swift */,
+				431830121EB9BE1B0057683B /* PhotoViewController.swift */,
 				4849188F1EC73A43004958D4 /* PhotoImportViewController.swift */,
-				48ECB6F21F0E7CAA00408D94 /* SOSViewController.swift */,
 				431830141EB9BE210057683B /* RoundButton.swift */,
 				4382F5E11EB098990085F563 /* MissionsViewController.swift */,
 				431830101EB9BE080057683B /* CameraViewController.swift */,
 				431D4D3E1E94C6FA00D5EDE0 /* BagCollectionViewController.swift */,
 				487FF3EB1E8E79C200F38EBA /* MoreViewController.swift */,
-				435E24891E9B3DC20097D8EC /* LogoutViewController.swift */,
+				4887F87D1EDD18BE00788235 /* BarcodeViewController.swift */,
+				48ECB6F21F0E7CAA00408D94 /* SOSViewController.swift */,
 				4364231B1F110AAE00D4B46F /* DieViewController.swift */,
+				435E24891E9B3DC20097D8EC /* LogoutViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -146,7 +148,9 @@
 		43A3E9251EBB232D00BFEB50 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				430AFBD81F33290A00333813 /* BarcodeView.swift */,
 				436576321EACBE9300A4A617 /* ItemDetailView.swift */,
+				437636ED1F19158600398BE9 /* MenuBarBelow.swift */,
 			);
 			name = SubViews;
 			sourceTree = "<group>";
@@ -172,7 +176,6 @@
 		7F3E9CBE1E6920AB00A17814 /* RunRRR */ = {
 			isa = PBXGroup;
 			children = (
-				4382F5DF1EB087B80085F563 /* MenuBar.swift */,
 				7F3E9CBF1E6920AB00A17814 /* AppDelegate.swift */,
 				4318300A1EB8971E0057683B /* configData.swift */,
 				7F3E9CC31E6920AB00A17814 /* Main.storyboard */,
@@ -344,6 +347,7 @@
 				484918901EC73A43004958D4 /* PhotoImportViewController.swift in Sources */,
 				436576331EACBE9300A4A617 /* ItemDetailView.swift in Sources */,
 				4318300B1EB8971E0057683B /* configData.swift in Sources */,
+				430AFBD91F33290A00333813 /* BarcodeView.swift in Sources */,
 				7F3E9CC21E6920AB00A17814 /* ViewController.swift in Sources */,
 				431830151EB9BE210057683B /* RoundButton.swift in Sources */,
 				7F3E9CC81E6920AB00A17814 /* RunRRR.xcdatamodeld in Sources */,
@@ -356,10 +360,10 @@
 				43738C861E93A63600C696CE /* MissionsCell.swift in Sources */,
 				439E95721E8CEE2C0070B3CB /* MapsViewController.swift in Sources */,
 				435E248A1E9B3DC20097D8EC /* LogoutViewController.swift in Sources */,
-				4382F5E41EB0B9D40085F563 /* lib.swift in Sources */,
 				48ECB6F31F0E7CAA00408D94 /* SOSViewController.swift in Sources */,
+				437636EE1F19158600398BE9 /* MenuBarBelow.swift in Sources */,
+				437636EC1F19112E00398BE9 /* Extensions.swift in Sources */,
 				439E95701E8CEE260070B3CB /* LoginViewController.swift in Sources */,
-				4382F5E01EB087B80085F563 /* MenuBar.swift in Sources */,
 				7F575D691E6EAE880096E8F5 /* Reachability.swift in Sources */,
 				4887F87E1EDD18BE00788235 /* BarcodeViewController.swift in Sources */,
 			);
