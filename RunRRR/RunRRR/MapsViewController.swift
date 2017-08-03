@@ -30,6 +30,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueViewControl
     var notInAreaWarningTimer = Timer()
     let menuBar : MenuBarBelow = {
         let menubar = MenuBarBelow()
+        menubar.currentPage = "Maps"
         return menubar
     }()
     //let networkQuality = Reach()
@@ -97,6 +98,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueViewControl
         self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
         
         self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*2/3))]-8-[v1]", views: mainMaps, menuBar)
+        
 
     }
 

@@ -17,7 +17,11 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
     private let refreshControl = UIRefreshControl()
     let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
     let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
-    let menuBar = MenuBarBelow()
+    let menuBar : MenuBarBelow = {
+        let menubar = MenuBarBelow()
+        menubar.currentPage = "Missions"
+        return menubar
+    }()
     var prevVC:UIViewController?
     lazy var missionCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -242,6 +246,7 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
         performSegue(withIdentifier: "ShowMissionDetail", sender: collectionView.cellForItem(at: indexPath))
         
     }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? ""){

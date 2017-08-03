@@ -21,6 +21,8 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     var delegate:segueViewController?
     var dataSource:segueViewController?
     
+    var currentPage:String?
+    
     let pages = ["Maps", "Missions", "Bags", "More"]
     let icons = ["tab_map","tab_mission","tab_bag","tab_more"]
     let iconsSel = ["tab_map_sel","tab_mission_sel","tab_bag_sel","tab_more_sel"]
@@ -44,7 +46,12 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuBarCell
-        cell.backgroundView = UIImageView.init(image: UIImage (named: icons[indexPath.item]))
+        //cell.backgroundView = UIImageView.init(image: UIImage (named: icons[indexPath.item]))
+        if(currentPage == pages[indexPath.item]){
+            cell.imageView.image = UIImage(named: iconsSel[indexPath.item])
+        }else{
+            cell.imageView.image = UIImage(named: icons[indexPath.item])
+        }
       //  cell.imageView2.image = UIImage(named: iconsSel[indexPath.item])
         
         
@@ -75,8 +82,13 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(2)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        let cell = collectionView.cellForItem(at: indexPath) as! MenuBarCell
+        cell.imageView.image = UIImage(named: iconsSel[indexPath.item])
     }
     let cellId = "MenuBarCellId"
     

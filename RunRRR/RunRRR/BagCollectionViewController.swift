@@ -20,7 +20,11 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
 //    var items = [Item]()
     var bag = [[Item]]()
     var prevVC: UIViewController?
-    let menuBar = MenuBarBelow()
+    let menuBar : MenuBarBelow = {
+        let menubar = MenuBarBelow()
+        menubar.currentPage = "Bags"
+        return menubar
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         prevVC?.dismiss(animated: false, completion: nil)

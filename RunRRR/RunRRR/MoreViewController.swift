@@ -17,7 +17,11 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
     var prevVC : UIViewController?
     let list = ["Barcode","Die","About","SOS","Logout"]
     let identities = ["Barcode","Die","About","SOS","Logout"]
-    let menuBar = MenuBarBelow()
+    let menuBar : MenuBarBelow = {
+        let menubar = MenuBarBelow()
+        menubar.currentPage = "More"
+        return menubar
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         prevVC?.dismiss(animated: false, completion: nil)
@@ -55,7 +59,7 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
         let viewController = storyboard?.instantiateViewController(withIdentifier: vcName)
         
         //self.navigationController?.pushViewController(viewController!, animated: true)
-        self.present(viewController!, animated: true, completion: nil)
+        self.present(viewController!, animated: false, completion: nil)
     }
     
     func segueToMissions() {
