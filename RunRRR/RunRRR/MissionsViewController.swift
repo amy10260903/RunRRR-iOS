@@ -15,8 +15,8 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
     var missionShowList = [MissionsData]()
     var completeMissionList = [MissionsData]()
     private let refreshControl = UIRefreshControl()
-    let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
-    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
+    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
     let menuBar : MenuBarBelow = {
         let menubar = MenuBarBelow()
         menubar.currentPage = "Missions"
@@ -117,9 +117,11 @@ class MissionsViewController: UIViewController, UICollectionViewDataSource, UICo
             //cell.missionStatus.backgroundColor = UIColor.darkGray
             cell.missionStatus.image = UIImage(named: "state_passed")
         default: //未解任務
+            cell.missionStatus.image = nil
             cell.missionStatus.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 0)
             //cell.missionName.backgroundColor = UIColor.brown
             //cell.backgroundColor = UIColor.brown
+            
         }
         return cell
 

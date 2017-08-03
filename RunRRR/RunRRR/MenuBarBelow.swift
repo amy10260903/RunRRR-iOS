@@ -52,12 +52,16 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         }else{
             cell.imageView.image = UIImage(named: icons[indexPath.item])
         }
-      //  cell.imageView2.image = UIImage(named: iconsSel[indexPath.item])
+        cell.imageView2.image = UIImage(named: iconsSel[indexPath.item])
         
         
         cell.backgroundColor = UIColor(red: 183/255, green: 183/255, blue:183/255, alpha: 1)
         cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = CGFloat(0)
+        cell.layer.borderWidth = CGFloat(0.5)
+        cell.layer.shadowRadius = 3
+        cell.layer.shadowOpacity = 0.8
+        cell.layer.shadowOffset = CGSize.zero
+        cell.layer.shadowColor = UIColor.darkGray.cgColor
         switch(indexPath.item){
         case 0:
             let tappedEvent = UITapGestureRecognizer(target: self, action: #selector(tappedMaps))
@@ -88,6 +92,7 @@ class MenuBarBelow : UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! MenuBarCell
+        print(indexPath)
         cell.imageView.image = UIImage(named: iconsSel[indexPath.item])
     }
     let cellId = "MenuBarCellId"

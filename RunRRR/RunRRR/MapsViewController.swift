@@ -16,12 +16,12 @@ import CoreLocation
 
 class MapsViewController: UIViewController, GMSMapViewDelegate, segueViewController{
 
-    @IBOutlet weak var mainMaps: GMSMapView!
+    let mainMaps = GMSMapView()
     @IBOutlet weak var pointSqr: UILabel!
     var missionShowList = [MissionsData]()
     var completeMissionList = [MissionsData]()
-    let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
-    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
+    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var validArea:Bool = true
     let manager = CLLocationManager()
     let pointSquare = UILabel()
@@ -33,7 +33,9 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueViewControl
         menubar.currentPage = "Maps"
         return menubar
     }()
+    let shadowView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     //let networkQuality = Reach()
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.mainMaps.clear()
@@ -58,10 +60,22 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueViewControl
         mainMaps.settings.zoomGestures = true
         mainMaps.layer.cornerRadius = 10
         mainMaps.layer.masksToBounds = true
-        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
-        self.view.addConstraintWithFormat(format: "H:|-8-[v0]-8-|", views: mainMaps)
-        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*19/30))]-\(self.view.frame.height/6+20)-|", views: mainMaps)
         
+//        shadowView.backgroundColor = UIColor.black
+        shadowView.layer.shadowColor = UIColor.darkGray.cgColor
+        shadowView.layer.shadowOpacity = 1
+        shadowView.layer.shadowOffset = CGSize.zero
+        shadowView.layer.shadowRadius = 5
+        
+        shadowView.addSubview(mainMaps)
+        
+        self.view.addSubview(shadowView)
+        
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
+        self.view.addConstraintWithFormat(format: "H:|-8-[v0]-8-|", views: shadowView)
+        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*19/30))]-\(self.view.frame.height/6+20)-|", views: shadowView)
+        shadowView.addConstraintWithFormat(format: "H:|[v0]|", views: mainMaps)
+        shadowView.addConstraintWithFormat(format: "V:|[v0]|", views: mainMaps)
         let pointLabel : UILabel = {
             let label = UILabel()
             label.text = "POINT"
@@ -96,8 +110,6 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, segueViewControl
         self.view.addSubview(menuBar)
         self.view.addConstraintWithFormat(format: "H:|[v0]|", views: menuBar)
         self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height/6))]-0-|", views: menuBar)
-        
-        self.view.addConstraintWithFormat(format: "V:[v0(\(self.view.frame.height*2/3))]-8-[v1]", views: mainMaps, menuBar)
         
 
     }

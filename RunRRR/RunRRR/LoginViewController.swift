@@ -88,8 +88,8 @@ class LoginViewController: UIViewController {
                 let userInfoJson = JSON(response.result.value!)
                 if(!userInfoJson["payload"]["correct"].boolValue){
                     isLogin = true
-                    let userUID = userInfoJson["uid"].int
-                    let token = userInfoJson["token"].stringValue
+                    let userUID = 290//userInfoJson["uid"].int
+                    let token = 123//userInfoJson["token"].stringValue
                     print(userInfoJson)
                     LocalUserDefault.set(isLogin, forKey: "RunRRR_Login")
                     LocalUserDefault.set(userUID, forKey: "RunRRR_UID")
