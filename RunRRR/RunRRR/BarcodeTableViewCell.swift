@@ -48,12 +48,13 @@ class BarcodeTableViewCell: UITableViewCell {
         titleBarView.backgroundColor = .green
         titleBarView.addSubview(smallCircle)
         titleBarView.addSubview(titleLabel)
-        titleLabel.text = "BARCODE"
-        titleLabel.textColor = .white
+        titleLabel.text = "Barcode"
+        titleLabel.textColor = .black
         smallCircle.image = UIImage(named: "bar_circle_icon")
         smallCircle.contentMode = .scaleAspectFill
+        
         let smallCircleSize = titleBarView.frame.height - 4
-        titleBarView.addConstraintWithFormat(format: "H:|-5-[v0(\(smallCircleSize))]-5-[v1]-5-|", views: smallCircle, titleLabel)
+        titleBarView.addConstraintWithFormat(format: "H:|-10-[v0(\(smallCircleSize))]-10-[v1]-5-|", views: smallCircle, titleLabel)
         titleBarView.addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: smallCircle)
         titleBarView.addConstraintWithFormat(format: "V:|-2-[v0(\(smallCircleSize))]-2-|", views: titleLabel)
     }
