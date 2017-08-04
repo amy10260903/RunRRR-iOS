@@ -36,10 +36,10 @@ class DieTableViewCell: UITableViewCell {
     }
     
     func setupTitleBarView(){
-        titleBarView.backgroundColor = .blue
+        titleBarView.backgroundColor = UIColor(red: 255/255, green: 184/255, blue:99/255, alpha: 1)
         titleBarView.addSubview(smallCircle)
         titleBarView.addSubview(titleLabel)
-        titleLabel.text = "DIE"
+        titleLabel.text = "Die"
         titleLabel.textColor = .white
         smallCircle.image = UIImage(named: "bar_circle_icon")
         smallCircle.contentMode = .scaleAspectFill

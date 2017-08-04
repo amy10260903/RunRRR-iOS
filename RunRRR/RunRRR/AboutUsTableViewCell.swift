@@ -45,7 +45,7 @@ class AboutUsTableViewCell: UITableViewCell {
         aboutUsTextView.font = UIFont.systemFont(ofSize: 16)
     }
     func setupTitleBarView(){
-        titleBarView.backgroundColor = .green
+        titleBarView.backgroundColor = UIColor(red: 73/255, green: 218/255, blue:187/255, alpha: 1)
         titleBarView.addSubview(smallCircle)
         titleBarView.addSubview(titleLabel)
         titleLabel.text = "About Us"

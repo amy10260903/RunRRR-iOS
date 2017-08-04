@@ -47,6 +47,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
             self.collectionView!.addSubview(refreshControl)
         }
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        fetchMoney()
         fetchPacks()
         menuBar.delegate = self
         menuBar.dataSource = self
@@ -161,8 +162,9 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
             showItemDetail(itemToDisplay)
         }
     }
+
     
-    private func fetchPacks(){
+    func fetchPacks(){
         // Remove history items
         packs.removeAll()
         bag.removeAll()

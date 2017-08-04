@@ -35,6 +35,7 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
         moreTableView.register(BarcodeTableViewCell.self, forCellReuseIdentifier: "BarcodeCell")
         moreTableView.register(AboutUsTableViewCell.self, forCellReuseIdentifier: "AboutUsCell")
         moreTableView.register(DieTableViewCell.self, forCellReuseIdentifier: "DieCell")
+        moreTableView.register(SOSTableViewCell.self, forCellReuseIdentifier: "SOSCell")
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,14 +73,19 @@ class MoreViewController: UIViewController , UITableViewDelegate, UITableViewDat
             moreCell.hideContent(!(selectedIndexPath==indexPath))
             tableViewSetup(cell: moreCell)
             return moreCell
+        case 3:
+            let morecell = tableView.dequeueReusableCell(withIdentifier: "SOSCell", for: indexPath) as! SOSTableViewCell
+            morecell.hideContent(!(selectedIndexPath==indexPath))
+            tableViewSetup(cell: morecell)
+            return morecell
         default:
             let moreCell = tableView.dequeueReusableCell(withIdentifier: "AboutUsCell", for: indexPath) as! AboutUsTableViewCell
             moreCell.hideContent(!(selectedIndexPath==indexPath))
             tableViewSetup(cell: moreCell)
             return moreCell
         }
-        
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if selectedIndexPath == indexPath{
             return expenedHeight
