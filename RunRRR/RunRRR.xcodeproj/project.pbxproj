@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431643D61F345BF20020C4F2 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431643D51F345BF20020C4F2 /* LogoutTableViewCell.swift */; };
 		4318300B1EB8971E0057683B /* configData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318300A1EB8971E0057683B /* configData.swift */; };
 		4318300D1EB9BDE50057683B /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4318300C1EB9BDE50057683B /* Camera.storyboard */; };
 		4318300F1EB9BDF00057683B /* MissionsDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4318300E1EB9BDF00057683B /* MissionsDetail.storyboard */; };
@@ -51,6 +52,7 @@
 		03A84B3247D28A89072CDBEE /* Pods_RunRRR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunRRR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18DD482414C4A29D10535B49 /* Pods-RunRRR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunRRR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RunRRR/Pods-RunRRR.debug.xcconfig"; sourceTree = "<group>"; };
 		1F13B208C49A62ECD2B8B2B5 /* Pods-RunRRR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunRRR.release.xcconfig"; path = "Pods/Target Support Files/Pods-RunRRR/Pods-RunRRR.release.xcconfig"; sourceTree = "<group>"; };
+		431643D51F345BF20020C4F2 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
 		4318300A1EB8971E0057683B /* configData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configData.swift; sourceTree = "<group>"; };
 		4318300C1EB9BDE50057683B /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		4318300E1EB9BDF00057683B /* MissionsDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MissionsDetail.storyboard; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				4341C7751F337DE8007A2A9A /* BarcodeTableViewCell.swift */,
 				7FFC81671F338EA0009BA1B2 /* AboutUsTableViewCell.swift */,
 				4341C7791F338B16007A2A9A /* DieTableViewCell.swift */,
+				431643D51F345BF20020C4F2 /* LogoutTableViewCell.swift */,
 				436576321EACBE9300A4A617 /* ItemDetailView.swift */,
 				437636ED1F19158600398BE9 /* MenuBarBelow.swift */,
 			);
@@ -359,6 +362,7 @@
 				435E24861E9B33430097D8EC /* missionsData.swift in Sources */,
 				4364231C1F110AAE00D4B46F /* DieViewController.swift in Sources */,
 				436862871E98F32600965A44 /* Items_Clues.swift in Sources */,
+				431643D61F345BF20020C4F2 /* LogoutTableViewCell.swift in Sources */,
 				7F3E9CC01E6920AB00A17814 /* AppDelegate.swift in Sources */,
 				4341C77A1F338B16007A2A9A /* DieTableViewCell.swift in Sources */,
 				431830131EB9BE1B0057683B /* PhotoViewController.swift in Sources */,

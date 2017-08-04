@@ -15,8 +15,8 @@ import SwiftyCam
 class MissionsDetailViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var imagePicker: UIImagePickerController!
-    let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
-    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
+    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var mission : MissionsData?
     var missionReportImage: UIImageView!
     var missionImage: UIImageView!
@@ -237,7 +237,7 @@ class MissionsDetailViewController: UIViewController,UIImagePickerControllerDele
                 case 2:
                     status.image = UIImage(named: "state_passed")
                 default: //未解任務
-                    status.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
+                    status.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 0)
                 }
             }
             return status
