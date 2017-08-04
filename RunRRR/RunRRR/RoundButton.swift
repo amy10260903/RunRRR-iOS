@@ -15,8 +15,8 @@ import SwiftyCam
 class MissionsDetailViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var imagePicker: UIImagePickerController!
-    let userID = 290//UserDefaults.standard.integer(forKey: "RunRRR_UID")
-    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let userID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
+    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var mission : MissionsData?
     var missionReportImage: UIImageView!
     var missionImage: UIImageView!

@@ -45,7 +45,7 @@ class BarcodeTableViewCell: UITableViewCell {
         barcodeImageView.image = encodeImageFromUID(userID)
     }
     func setupTitleBarView(){
-        titleBarView.backgroundColor = .green
+        titleBarView.backgroundColor = UIColor(red: 85/255, green: 248/255, blue:219/255, alpha: 1)
         titleBarView.addSubview(smallCircle)
         titleBarView.addSubview(titleLabel)
         titleLabel.text = "Barcode"
