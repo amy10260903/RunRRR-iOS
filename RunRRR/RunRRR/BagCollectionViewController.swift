@@ -15,11 +15,13 @@ private let reuseIdentifier = "BagItemCell"
 class BagCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, segueViewController {
     private let refreshControl = UIRefreshControl()
     let LocalUserDefault = UserDefaults.standard
+    let UID = UserDefaults.standard.integer(forKey: "RunRRR_UID")
     let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var packs = [Pack]()
 //    var items = [Item]()
     var bag = [[Item]]()
     var prevVC: UIViewController?
+    var memberMoney: Int?
     let menuBar : MenuBarBelow = {
         let menubar = MenuBarBelow()
         menubar.currentPage = "Bags"
@@ -94,6 +96,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
         if(indexPath.item == 0){  // the first block displays money
             cell.itemImage.image = UIImage(named: "money")
             cell.itemName.text = "金錢"
+            cell.itemCount.text = memberMoney?.description
         }else{
             cell.itemName.text = bag[indexPath.item-1].last?.name
             if let imageUrl = bag[indexPath.item-1].last?.imageURL {
@@ -163,6 +166,19 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
         }
     }
 
+    func fetchMoney(){
+        let moneyParameter : Parameters = ["operator_uid":UID, "token":token, "uid":UID]
+        Alamofire.request("\(API_URL)/member/read", parameters: moneyParameter).responseJSON{ response in
+            switch response.result{
+            case .success(let value):
+                let memberReadJSON = JSON(value)
+                let memberReadArray = memberReadJSON["payload"]["objects"].arrayValue
+                self.memberMoney = memberReadArray[0]["money"].intValue
+            case .failure:
+                print("error")
+            }
+        }
+    }
     
     func fetchPacks(){
         // Remove history items
