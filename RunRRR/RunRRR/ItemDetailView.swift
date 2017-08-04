@@ -19,10 +19,12 @@ class ItemDetailView: NSObject{
     let detailWindow = ItemDetailWindow()
     var delegateViewController:BagCollectionViewController?
     var item : Item?
+    var itemCount : Int = 0
     
-    func showDetail(_ itemToDisplay: Item){
+    func showDetail(_ itemToDisplay: Item, itemCount: Int){
         //show detail view
         item = itemToDisplay
+        self.itemCount = itemCount
         if let window = UIApplication.shared.keyWindow{
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             detailWindow.backgroundColor = UIColor(red: 230/255, green: 230/255, blue:230/255, alpha: 1)
@@ -32,9 +34,11 @@ class ItemDetailView: NSObject{
             blackView.frame = window.frame
             blackView.alpha = 0
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissDetail)))
+            detailWindow.hideUseButton(self.item?.itemClass == .clue)
             
             detailWindow.itemNameLabel.text = itemToDisplay.name
             detailWindow.itemContentTextView.text = itemToDisplay.content
+            detailWindow.itemCountLabel.text = self.itemCount.description
             //detailWindow.itemCountLabel.text = String(self.bag[indexPath.item-1].count)
             
             detailWindow.itemUseButton.addTarget(self, action: #selector(useItem), for: .touchUpInside)
@@ -60,10 +64,12 @@ class ItemDetailView: NSObject{
     }
     
     func useItem(){
-        let UID : Int =  UserDefaults.standard.integer(forKey: "RunRRR_UID")
+        let UID =  UserDefaults.standard.integer(forKey: "RunRRR_UID")
         let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
-        let paraForDelete : Parameters = ["operator_uid":UID, "token":token, "uid":UID, "pid":(self.item?.pid)! as Int]
-        Alamofire.request("\(API_URL)/pack/delete", method: .delete, parameters: paraForDelete).responseJSON{ response in
+        
+        let paraForDelete : Parameters = ["operator_uid":UID, "token":token, "pid":(self.item?.pid)!]
+        print(paraForDelete.description)
+        Alamofire.request("\(API_URL)/pack/delete", method: HTTPMethod.delete, parameters: paraForDelete, encoding: URLEncoding.httpBody).responseJSON{ response in
             print(response)
             
             switch(response.result){
@@ -75,7 +81,7 @@ class ItemDetailView: NSObject{
         }
         DispatchQueue.main.async{
             self.dismissDetail()
-            self.delegateViewController?.collectionView?.reloadData()
+            self.delegateViewController?.fetchPacks()
         }
     }
 }
@@ -152,5 +158,9 @@ class ItemDetailWindow : UIView{
         addConstraintWithFormat(format: "H:|-20-[v0(60)]", views: itemCancelButton)
         addConstraintWithFormat(format: "H:[v0(40)]-0-[v1(30)]-20-|", views: itemUseButton,itemCountLabel)
         addConstraintWithFormat(format: "H:|-10-[v0]-10-|", views: itemContentTextView)
+    }
+    func hideUseButton(_ isHidden: Bool){
+        self.itemUseButton.isHidden = isHidden
+        self.itemCountLabel.isHidden = isHidden
     }
 }

@@ -15,7 +15,7 @@ private let reuseIdentifier = "BagItemCell"
 class BagCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, segueViewController {
     private let refreshControl = UIRefreshControl()
     let LocalUserDefault = UserDefaults.standard
-    let token = 123//UserDefaults.standard.string(forKey: "RunRRR_Token")!
+    let token = UserDefaults.standard.string(forKey: "RunRRR_Token")!
     var packs = [Pack]()
 //    var items = [Item]()
     var bag = [[Item]]()
@@ -121,9 +121,9 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
     
     let itemDetailView = ItemDetailView()
     
-    func showItemDetail(_ item: Item){
+    func showItemDetail(_ item: Item, itemCount:Int){
         itemDetailView.delegateViewController = self
-        itemDetailView.showDetail(item)
+        itemDetailView.showDetail(item, itemCount: itemCount)
     }
     // MARK: UICollectionViewDelegate
 
@@ -159,7 +159,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
 //        let cell = collectionView.cellForItem(at: indexPath)
         if (indexPath.item != 0){
             let itemToDisplay = bag[indexPath.item-1].last! as Item
-            showItemDetail(itemToDisplay)
+            showItemDetail(itemToDisplay, itemCount: bag[indexPath.item-1].count)
         }
     }
 
@@ -170,7 +170,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
         bag.removeAll()
         
         //Start calling API
-        let UID = 290//LocalUserDefault.integer(forKey: "RunRRR_UID")
+        let UID = LocalUserDefault.integer(forKey: "RunRRR_UID")
         let packParameter : Parameters = ["operator_uid":UID,"token":self.token, "uid":UID]
         Alamofire.request("\(API_URL)/pack/read", parameters: packParameter).responseJSON{ response in
             switch response.result{
@@ -193,16 +193,21 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
                     }()
                     self.packs += [pack]
                 }
+                
             case .failure:
                 print("error")
             }
             self.fetchItem()
+//            self.packs.sort(by: {($0.itemClass?.hashValue)! > ($1.itemClass?.hashValue)!})
+//            for i in self.packs{
+//                print(i.itemClass.debugDescription)
+//            }
         }
     }
     private func fetchItem(){
         for itemToFetch in packs{
             if(itemToFetch.itemClass == .tool){
-                let UID = 290//LocalUserDefault.integer(forKey: "RunRRR_UID")
+                let UID = LocalUserDefault.integer(forKey: "RunRRR_UID")
                 let toolsParameter : Parameters = ["operator_uid":UID,"token":self.token, "tid":itemToFetch.id as Any]
                 Alamofire.request("\(API_URL)/tool/read", parameters:toolsParameter).responseJSON{ response in
 //                    print(response)
@@ -233,7 +238,7 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
                 }
             }
             else{
-                let UID = 290//LocalUserDefault.integer(forKey: "RunRRR_UID")
+                let UID = LocalUserDefault.integer(forKey: "RunRRR_UID")
                 let toolsParameter : Parameters = ["operator_uid":UID,"token":self.token, "cid":itemToFetch.id as Any]
                 Alamofire.request("\(API_URL)/clue/read", parameters:toolsParameter).responseJSON{ response in
                     switch(response.result){
@@ -243,9 +248,11 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
                         let clue : Item = {
                             let item = Item()
                             item.itemClass = .clue
+                            item.pid = itemToFetch.pid
                             item.cid = clueArray[0]["cid"].intValue
                             item.content = clueArray[0]["content"].stringValue
                             item.name = "線索"
+                            item.imageURL = "clue.jpg"
                             return item
                         }()
 //                        self.items += [clue]
@@ -279,12 +286,29 @@ class BagCollectionViewController: UICollectionViewController, UICollectionViewD
     }
     
     private func itemsDidFetch(){
+        var sortTool = [[Item]]()
+        var sortClue = [Item]()
         var total = 0
         for item in bag {
             total += item.count
         }
         if(total == packs.count){
-//            self.items.sort(by: {$0.itemClass!.hashValue < $1.itemClass!.hashValue})
+//          self.items.sort(by: {$0.itemClass!.hashValue < $1.itemClass!.hashValue})
+            for item in bag{
+                if item.last?.itemClass == .clue{
+                    for clue in item{
+                        sortClue.append(clue)
+                    }
+                }else{
+                    sortTool.append(item)
+                }
+            }
+            sortTool.sort(by: {$0[0].tid! < $1[0].tid!})
+            sortClue.sort(by: {$0.pid! < $1.pid!})
+            self.bag = sortTool
+            for clue in sortClue{
+                self.bag.append([clue])
+            }
             self.collectionView?.reloadData()
             self.refreshControl.endRefreshing()
         }
